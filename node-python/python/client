@@ -1,22 +1,65 @@
 #!/usr/bin/env python
+
 import argparse
+import socket
 
 class Client:
+
 
     def __init__(self, hostname, port):
 
         self.hostname = hostname
         self.port = port
-
-        if self.hostname == None:
-            self.hostname = 'localhost'
-
-        if self.port == None:
-            self.port = 17171
-            
-        print self.hostname + ':' + str(self.port)
+        if hostname is None: self.hostname = 'localhost'
+        if port is None: self.port = 17171
 
 
+    def connect(self):
+
+        print 'connecting %s:%i' % (self.hostname, self.port)
+        self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.socket.connect((self.hostname, self.port))
+        self.listen()
+
+
+    def listen(self):
+
+        try:
+
+            #
+            # wait for data, and split on ' '
+            #
+
+            act = client.socket.recv(512).split()
+
+            if len(act) is 1:
+
+                #
+                # got 1 word, 
+                # calls word()
+                #
+
+                getattr(self, act[0])()
+
+            else:
+
+                #
+                # got more than one word,
+                # calls first_word(['remaining','words'])
+                #
+
+                getattr(self, act[0])(act[1:])
+
+
+        except Exception, e:
+
+            print 'no method for %s' % act
+            self.listen()
+
+
+    def exit(self):
+
+        self.socket.close()
 
 
 parser = argparse.ArgumentParser()
@@ -27,5 +70,5 @@ parser.add_argument("-P", "--port",
                     type=int,
                     help="To connect (default 17171)")
 args = parser.parse_args()
-
 client = Client(args.hostname, args.port)
+client.connect()
