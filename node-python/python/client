@@ -1,0 +1,31 @@
+#!/usr/bin/env python
+import argparse
+
+class Client:
+
+    def __init__(self, hostname, port):
+
+        self.hostname = hostname
+        self.port = port
+
+        if self.hostname == None:
+            self.hostname = 'localhost'
+
+        if self.port == None:
+            self.port = 17171
+            
+        print self.hostname + ':' + str(self.port)
+
+
+
+
+parser = argparse.ArgumentParser()
+parser.add_argument("-H", "--hostname", 
+                    type=str,
+                    help="To connect (default localhost)")
+parser.add_argument("-P", "--port", 
+                    type=int,
+                    help="To connect (default 17171)")
+args = parser.parse_args()
+
+client = Client(args.hostname, args.port)

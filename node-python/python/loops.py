@@ -101,9 +101,4 @@ print my_function.__doc__  # --> my function() says hello
 
 
 
-# keyword args http://docs.python.org/2/tutorial/controlflow.html#keyword-arguments
-
-# unpacking args http://docs.python.org/2/tutorial/controlflow.html#keyword-arguments
-
-
 
