@@ -27,7 +27,7 @@ class Client:
         try:
 
             #
-            # wait for data, and split on ' '
+            # blocking (wait for data), and split on ' '
             #
 
             act = client.socket.recv(512).split()
@@ -52,7 +52,7 @@ class Client:
 
 
         except Exception, e:
-
+            print e
             print 'no method for %s' % act
             self.listen()
 
@@ -60,6 +60,14 @@ class Client:
     def exit(self):
 
         self.socket.close()
+
+
+    def hello(self, seq):
+
+        print 'received: hello( %s )' % seq
+        self.socket.send('hello %s ok' % seq[0])
+        self.listen()
+
 
 
 parser = argparse.ArgumentParser()
