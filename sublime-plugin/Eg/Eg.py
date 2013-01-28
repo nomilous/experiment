@@ -5,5 +5,6 @@ class EgCommand(sublime_plugin.TextCommand):
 
     def run(self, edit):
 
-        self.view.set_status('Eg', 'plugin ran')
+        self.view.set_status('Eg', 'plugin RAN')
+
 

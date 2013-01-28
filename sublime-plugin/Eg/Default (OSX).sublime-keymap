@@ -1,0 +1,7 @@
+[
+    // bind to CMD+alt+m
+    
+    { "keys": ["super+alt+m"],
+        "command": "eg"    
+    }
+]
