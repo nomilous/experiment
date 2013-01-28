@@ -15,6 +15,7 @@ class EgCommand(sublime_plugin.TextCommand):
 
         #
         # recurse a lambda to continuously check for status result
+        # and write it to status bar
         #
 
         sublime.set_timeout(lambda: self.thread_result(thread), 10)
@@ -32,7 +33,7 @@ class EgApiCall(threading.Thread):
 
         #
         # loops, incrementing count every 100th of a second
-        # and write into the status bar
+        # and sets result with text containing the next count
         # 
 
         count += 1
