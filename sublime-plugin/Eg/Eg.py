@@ -2,14 +2,29 @@ import sublime
 import sublime_plugin
 import threading
 
+#
+# to run:
+# ./install.bash
+# CMD+alt+m (in the editor)
+#
+
+# REPLACE_THIS ALSO ALSO ALSO ALSO ALSO ALSO ALSO   sf
+
 class EgCommand(sublime_plugin.TextCommand):
 
     def run(self, edit):
 
-        self.view.set_status('Eg', 'plugin RAN')
-        thread = EgApiCall()
-        thread.start()
-        self.thread_result(thread)
+        # self.view.set_status('Eg', 'plugin RAN')
+        # thread = EgApiCall()
+        # thread.start()
+        # self.thread_result(thread)
+
+
+        sel = self.view.find("REPLACE_THIS",0, sublime.LITERAL)
+
+        if sel != -1:
+            self.view.replace(edit, sel, "REPLACE_THIS ALSO")
+            
 
     def thread_result(self, thread):
 
