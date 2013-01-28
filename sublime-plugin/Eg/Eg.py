@@ -1,4 +1,6 @@
 # 
+# 
+
 import sublime
 import sublime_plugin
 import threading
@@ -18,18 +20,17 @@ class EgCommand(sublime_plugin.TextCommand):
         # thread.start()
         # self.thread_result(thread)
 
+        
         #
         # set the 'point' to the start of the first line
         #
         row = 0
         col = 0
         point = self.view.text_point(row, col)
-
         #
         # set selection to span the line containing the point
         #
         selection_region = self.view.line(point)
-
         #
         # replace selection
         #
@@ -47,24 +48,48 @@ class EgCommand(sublime_plugin.TextCommand):
         self.view.set_status('Eg', str(thread.result))
 
 
-class EgApiCall(threading.Thread):
-    
-    def __init__(self):
+class EgHighlightCommand(sublime_plugin.TextCommand):
 
-        threading.Thread.__init__(self)
-        self.result = 0
-
-    def loop(self, count):
+    def run(self, edit):
 
         #
-        # loops, incrementing count every 100th of a second
-        # and sets result with text containing the next count
-        # 
+        # when a word is highlighted
+        #
 
-        count += 1
-        self.result = 'number %i into the status bar' % count
-        sublime.set_timeout(lambda: self.loop(count), 10)
+        view = self.view
+        
+        for sel in view.sel():
 
-    def run(self):
+            highlighted_word = view.substr(sel)
 
-        self.loop(1)
+            if len(sel):
+
+                #
+                # put highlighted word on 2nd line
+                #
+
+                line1 = view.line( view.text_point(1, 0) )
+                view.replace(edit, line1, "# " + highlighted_word)
+
+
+# class EgApiCall(threading.Thread):
+    
+#     def __init__(self):
+
+#         threading.Thread.__init__(self)
+#         self.result = 0
+
+#     def loop(self, count):
+
+#         #
+#         # loops, incrementing count every 100th of a second
+#         # and sets result with text containing the next count
+#         # 
+
+#         count += 1
+#         self.result = 'number %i into the status bar' % count
+#         sublime.set_timeout(lambda: self.loop(count), 10)
+
+#     def run(self):
+
+#         self.loop(1)
