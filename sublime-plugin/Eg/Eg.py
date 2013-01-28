@@ -1,3 +1,4 @@
+# 
 import sublime
 import sublime_plugin
 import threading
@@ -8,8 +9,6 @@ import threading
 # CMD+alt+m (in the editor)
 #
 
-# REPLACE_THIS ALSO ALSO ALSO ALSO ALSO ALSO ALSO   sf
-
 class EgCommand(sublime_plugin.TextCommand):
 
     def run(self, edit):
@@ -19,11 +18,22 @@ class EgCommand(sublime_plugin.TextCommand):
         # thread.start()
         # self.thread_result(thread)
 
+        #
+        # set the 'point' to the start of the first line
+        #
+        row = 0
+        col = 0
+        point = self.view.text_point(row, col)
 
-        sel = self.view.find("REPLACE_THIS",0, sublime.LITERAL)
+        #
+        # set selection to span the line containing the point
+        #
+        selection_region = self.view.line(point)
 
-        if sel != -1:
-            self.view.replace(edit, sel, "REPLACE_THIS ALSO")
+        #
+        # replace selection
+        #
+        self.view.replace(edit, selection_region, "# THIS REPLACES FIRST LINE")
             
 
     def thread_result(self, thread):
