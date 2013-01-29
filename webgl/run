@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+# 
+# TODO: figure out `npm link`
+# 
+
+if ! [ -d ./node_modules ]; then
+
+    npm install
+
+fi
+
+cd node_modules
+
+if ! [ -d ./et ]; then
+    
+    git clone git@github.com:nomilous/et
+    cd et
+    npm install
+
+else
+    cd et
+fi
+
+
+git checkout develop
+git pull origin develop
+
+cd ../../
+
+node_modules/.bin/coffee start
+
+# curl localhost:3000/actors/1
