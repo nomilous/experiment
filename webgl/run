@@ -4,30 +4,32 @@
 # TODO: figure out `npm link`
 # 
 
-if ! [ -d ./node_modules ]; then
+# if ! [ -d ./node_modules ]; then
 
-    npm install
+#     npm install
 
-fi
+# fi
 
-cd node_modules
+# cd node_modules
 
-if ! [ -d ./et ]; then
+# if ! [ -d ./et ]; then
     
-    git clone git@github.com:nomilous/et
-    cd et
-    npm install
+#     git clone git@github.com:nomilous/et
+#     cd et
+#     npm install
 
-else
-    cd et
-fi
+# else
+#     cd et
+# fi
 
 
-git checkout develop
-git pull origin develop
+# git checkout develop
+# git pull origin develop
 
-cd ../../
+# cd ../../
 
+
+npm install
 node_modules/.bin/coffee start
 
 # curl localhost:3000/actors/1
