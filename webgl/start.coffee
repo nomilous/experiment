@@ -10,9 +10,9 @@ et.al
 
     static:
 
-        models:
+        shared:
 
-            path: __dirname + '/app/models'
+            path: __dirname + '/app/shared'
 
     before: (server) -> 
 
@@ -29,4 +29,4 @@ et.al
 
     models:
 
-        actors: require './app/models/actor'
+        actors: require './app/shared/models/actor'
