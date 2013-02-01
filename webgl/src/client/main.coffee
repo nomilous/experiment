@@ -10,9 +10,6 @@ requirejs.config
 
 requirejs ['realm', 'angular', 'three' ], (Realm) -> 
 
-    #
-    # angular and three mix into the global scope
-    #
-
-    new Realm( document, 'viewport' )
+    realm = new Realm document, window, angular, THREE, 'viewport'
+    realm.animate()
 

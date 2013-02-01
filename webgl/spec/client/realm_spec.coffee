@@ -7,21 +7,37 @@ describe 'Realm', ->
 
     before (done) ->
 
-        #
-        # mock DOM
-        #
-
         @spy = sinon.spy()
 
-        @DOM = getElementById: (id) => @spy id
-                
+        #
+        # mock all
+        #
+
+        @document = 
+            getElementById: (id) => 
+                @spy id
+                return appendChild: ->
+        @window =
+            innerWidth: 1024
+            innerHeight: 768
+        @angular = {}
+        @three = 
+            PerspectiveCamera: -> position: x: 0, y: 0, z: 0
+            Scene: -> 
+                add: ->
+            CubeGeometry: -> 
+            MeshBasicMaterial: ->
+            Mesh: ->
+            CanvasRenderer: ->
+                setSize: ->
+                domElement: {}
 
         done()
 
 
-    it 'is constructed with the DOM root and viewport div element id', (done) -> 
+    it 'is constructed with all required elements from the global scope', (done) -> 
 
-        realm = new Realm @DOM, 'viewport_id'
+        realm = new Realm @document, @window, @angular, @three, 'viewport_id'
 
         @spy.calledWith('viewport_id').should.equal true
         done()
