@@ -7,14 +7,13 @@ class Realm
         width  = 300
         height = 200
 
-        console.log width, height
-
-
         @camera = new @three.PerspectiveCamera 75, width / height, 1, 10000
         @camera.position.z = 1000
-        
 
-        @scene = new @three.Scene()
+
+        @scene = new this.Scene()
+
+
         geometry = new @three.CubeGeometry 200, 200, 200
         material = new @three.MeshBasicMaterial 
             color: 0xff0000
@@ -37,7 +36,7 @@ class Realm
 
         @mesh.rotation.x += 0.01
         @mesh.rotation.y += 0.02
-        @renderer.render @scene, @camera
+        @renderer.render @scene.scene, @camera
 
 
 
@@ -46,8 +45,10 @@ if typeof window == 'undefined'
 
     #
     # serverside (node defines no window)
-    #
+    # 
 
+    Realm.prototype.Scene = require './models/scene'
+    Realm.prototype.Actor = require './models/actor'
     module.exports = Realm
 
 else
@@ -56,5 +57,9 @@ else
     # clientside
     #
 
-    define -> Realm
+    define ['models/scene', 'models/actor'], (Scene, Actor) -> 
+
+        Realm.prototype.Scene = Scene
+        Realm.prototype.Actor = Actor
+        return Realm
 

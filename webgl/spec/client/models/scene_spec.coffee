@@ -17,3 +17,10 @@ describe 'Scene', ->
         (new Scene actors: id: actor).actors.id.should.equal actor
         done()
 
+
+    it 'defines add()', (done) ->
+
+        scene = new Scene()
+        scene.add {}
+        done() 
+

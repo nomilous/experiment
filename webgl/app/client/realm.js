@@ -15,10 +15,9 @@ Realm = (function() {
     this.root = this.dom.getElementById(divID);
     width = 300;
     height = 200;
-    console.log(width, height);
     this.camera = new this.three.PerspectiveCamera(75, width / height, 1, 10000);
     this.camera.position.z = 1000;
-    this.scene = new this.three.Scene();
+    this.scene = new this.Scene();
     geometry = new this.three.CubeGeometry(200, 200, 200);
     material = new this.three.MeshBasicMaterial({
       color: 0xff0000,
@@ -35,7 +34,7 @@ Realm = (function() {
     requestAnimationFrame(this.animate);
     this.mesh.rotation.x += 0.01;
     this.mesh.rotation.y += 0.02;
-    return this.renderer.render(this.scene, this.camera);
+    return this.renderer.render(this.scene.scene, this.camera);
   };
 
   return Realm;
@@ -43,9 +42,13 @@ Realm = (function() {
 })();
 
 if (typeof window === 'undefined') {
+  Realm.prototype.Scene = require('./models/scene');
+  Realm.prototype.Actor = require('./models/actor');
   module.exports = Realm;
 } else {
-  define(function() {
+  define(['models/scene', 'models/actor'], function(Scene, Actor) {
+    Realm.prototype.Scene = Scene;
+    Realm.prototype.Actor = Actor;
     return Realm;
   });
 }

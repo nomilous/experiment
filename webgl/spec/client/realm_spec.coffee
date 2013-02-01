@@ -42,3 +42,19 @@ describe 'Realm', ->
         @spy.calledWith('viewport_id').should.equal true
         done()
 
+
+    it 'has Actor and Scene definitions subclassed', (done) -> 
+
+        #
+        # To avoid the colliding require() signature,
+        # 
+        # requireJS and node both define it
+        #
+
+        Realm.prototype.Scene.should.equal require '../../app/client/models/scene'
+        Realm.prototype.Actor.should.equal require '../../app/client/models/actor'
+
+        done()
+
+
+

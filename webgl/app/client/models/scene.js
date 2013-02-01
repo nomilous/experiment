@@ -8,16 +8,23 @@ Scene = (function() {
       scene = {};
     }
     this.actors = scene.actors || {};
+    this.scene = new this.THREE.Scene();
   }
+
+  Scene.prototype.add = function(actor) {
+    return this.scene.add(actor);
+  };
 
   return Scene;
 
 })();
 
 if (typeof window === 'undefined') {
+  Scene.prototype.THREE = require('../../server/three-stub');
   module.exports = Scene;
 } else {
-  define(function() {
+  define(['three'], function() {
+    Scene.prototype.THREE = THREE;
     return Scene;
   });
 }
