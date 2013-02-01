@@ -14,5 +14,5 @@ requirejs ['realm', 'angular', 'three' ], (Realm) ->
     # angular and three mix into the global scope
     #
 
-    new Realm( 'viewport' )
+    new Realm( document, 'viewport' )
 

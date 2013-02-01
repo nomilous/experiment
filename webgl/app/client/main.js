@@ -9,5 +9,5 @@ requirejs.config({
 });
 
 requirejs(['realm', 'angular', 'three'], function(Realm) {
-  return new Realm('viewport');
+  return new Realm(document, 'viewport');
 });
