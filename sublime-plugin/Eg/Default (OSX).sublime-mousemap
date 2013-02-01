@@ -1,22 +1,23 @@
-[
-    // 
-    // bind double click word select to EgHighlightCommand
-    //
+[]
+// [
+//     // 
+//     // bind double click word select to EgHighlightCommand
+//     //
 
-    {
-        "button": "button1", "count": 2,
-        "press_command": "drag_select",
-        "press_args": {"by": "words"},
-        "command": "eg_highlight"
-    }, 
+//     {
+//         "button": "button1", "count": 2,
+//         "press_command": "drag_select",
+//         "press_args": {"by": "words"},
+//         "command": "eg_highlight"
+//     }, 
 
-    // 
-    // bind drag mousedown word select to EgHighlightCommand
-    //
+//     // 
+//     // bind drag mousedown word select to EgHighlightCommand
+//     //
 
-    {
-        "button": "button1", "count": 1,
-        "press_command": "drag_select",
-        "command": "eg_highlight"
-    }
-]
+//     {
+//         "button": "button1", "count": 1,
+//         "press_command": "drag_select",
+//         "command": "eg_highlight"
+//     }
+// ]

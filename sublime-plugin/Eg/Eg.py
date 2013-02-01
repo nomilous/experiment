@@ -1,9 +1,11 @@
 # 
-# 
+#
+#
 
 import sublime
 import sublime_plugin
 import threading
+
 
 #
 # to run:
@@ -20,21 +22,35 @@ class EgCommand(sublime_plugin.TextCommand):
         # thread.start()
         # self.thread_result(thread)
 
+
+        # panel = self.view.window().get_output_panel("OUTPUT")
+        # self.view.window().run_command("show_panel", {"panel": "output.OUTPUT"})
+        # panel.insert(edit, 0 , "oisivu\nbsldibvsd\nibov\nlsdfo\n\n\nvbusd\nfh \n aious\nhfodas ")
+
+        new_view = self.view.window().new_file()
+        new_view.set_scratch(True)
+        new_view.set_name("NEW")
+        new_view.insert(edit, 0 , "one")
+
+        # new_view.setting()
+
+
+
         
-        #
-        # set the 'point' to the start of the first line
-        #
-        row = 0
-        col = 0
-        point = self.view.text_point(row, col)
-        #
-        # set selection to span the line containing the point
-        #
-        selection_region = self.view.line(point)
-        #
-        # replace selection
-        #
-        self.view.replace(edit, selection_region, "# THIS REPLACES FIRST LINE")
+        # #
+        # # set the 'point' to the start of the first line
+        # #
+        # row = 0
+        # col = 0
+        # point = self.view.text_point(row, col)
+        # #
+        # # set selection to span the line containing the point
+        # #
+        # selection_region = self.view.line(point)
+        # #
+        # # replace selection
+        # #
+        # self.view.replace(edit, selection_region, "# THIS REPLACES FIRST LINE")
             
 
     def thread_result(self, thread):
@@ -57,6 +73,8 @@ class EgHighlightCommand(sublime_plugin.TextCommand):
         #
 
         view = self.view
+
+
         
         for sel in view.sel():
 
@@ -68,8 +86,16 @@ class EgHighlightCommand(sublime_plugin.TextCommand):
                 # put highlighted word on 2nd line
                 #
 
-                line1 = view.line( view.text_point(1, 0) )
-                view.replace(edit, line1, "# " + highlighted_word)
+                line2 = view.line( view.text_point(1, 0) )   
+                view.replace(edit, line2, "# " + highlighted_word)
+
+                #
+                # put filenam on 3rd line
+                #
+
+                line3 = view.line( view.text_point(2, 0) )
+                view.replace(edit, line3, "# in " + view.file_name())
+                
 
 
 # class EgApiCall(threading.Thread):
