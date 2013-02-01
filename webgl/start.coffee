@@ -17,7 +17,7 @@ Et.al
             app.set 'view engine', 'jade'
             app.set 'views', __dirname + '/views'
             app.use '/client', Express.static __dirname + '/app/client'
-            app.use '/public', Express.static __dirname + '/public'
+            app.use '/vendor', Express.static __dirname + '/vendor'
 
         app.get '/', (req, res) -> res.render 'index'        
 
