@@ -5,7 +5,7 @@ var Realm,
 Realm = (function() {
 
   function Realm(dom, window, angular, three, divID) {
-    var geometry, material;
+    var geometry, height, material, width;
     this.dom = dom;
     this.window = window;
     this.angular = angular;
@@ -13,7 +13,10 @@ Realm = (function() {
     this.animate = __bind(this.animate, this);
 
     this.root = this.dom.getElementById(divID);
-    this.camera = new this.three.PerspectiveCamera(75, this.window.innerWidth / this.window.innerHeight, 1, 10000);
+    width = 300;
+    height = 200;
+    console.log(width, height);
+    this.camera = new this.three.PerspectiveCamera(75, width / height, 1, 10000);
     this.camera.position.z = 1000;
     this.scene = new this.three.Scene();
     geometry = new this.three.CubeGeometry(200, 200, 200);
@@ -24,7 +27,7 @@ Realm = (function() {
     this.mesh = new this.three.Mesh(geometry, material);
     this.scene.add(this.mesh);
     this.renderer = new this.three.CanvasRenderer();
-    this.renderer.setSize(this.window.innerWidth, this.window.innerHeight);
+    this.renderer.setSize(width, height);
     this.root.appendChild(this.renderer.domElement);
   }
 

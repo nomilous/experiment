@@ -4,8 +4,13 @@ class Realm
 
         @root = @dom.getElementById divID
 
+        width  = 300
+        height = 200
 
-        @camera = new @three.PerspectiveCamera 75, @window.innerWidth / @window.innerHeight, 1, 10000
+        console.log width, height
+
+
+        @camera = new @three.PerspectiveCamera 75, width / height, 1, 10000
         @camera.position.z = 1000
         
 
@@ -21,7 +26,7 @@ class Realm
         
 
         @renderer = new @three.CanvasRenderer()
-        @renderer.setSize @window.innerWidth, @window.innerHeight
+        @renderer.setSize width, height
 
 
         @root.appendChild @renderer.domElement
@@ -29,7 +34,7 @@ class Realm
     animate: => 
 
         requestAnimationFrame @animate
-        
+
         @mesh.rotation.x += 0.01
         @mesh.rotation.y += 0.02
         @renderer.render @scene, @camera

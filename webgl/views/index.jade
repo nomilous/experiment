@@ -3,5 +3,24 @@ html
     head
         block scripts
             script(data-main='client/main', src='vendor/js/require-2.1.4.js')
+
+        style(type='text/css')
+
+          .viewport {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            width: 300px;
+            height: 200px;
+            visibility: visible;
+            border: 1px solid black;
+            background: grey;
+            color: white;
+
     body
-        #viewport
+
+        #viewport(
+
+            class = 'viewport'
+
+        )
