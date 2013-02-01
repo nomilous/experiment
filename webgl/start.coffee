@@ -1,32 +1,29 @@
-et      = require 'et'
-views   = require 'connect-jade'
+Express = require 'express'
+Et      = require 'et'
+port    = 3000
+server  = Express()
 
-et.al
+Et.al
+
+    app: server
 
     session: false
     auth: false
 
-    root: __dirname
+    use: (app) -> 
 
-    static:
+        app.configure -> 
 
-        shared:
+            app.set 'view engine', 'jade'
+            app.set 'views', __dirname + '/views'
+            app.use '/client', Express.static __dirname + '/app/client'
+            app.use '/public', Express.static __dirname + '/public'
 
-            path: __dirname + '/app/shared'
-
-    before: (server) -> 
-
-        server.use views root: 'views'
-
-        server.get '/start', (req, res, next) -> 
-
-            #
-            # http://localhost:3000
-            #
-
-            res.render 'index'
-            
+        app.get '/', (req, res) -> res.render 'index'        
 
     models:
 
-        actors: require './app/shared/models/actor'
+        actors: require './app/server/models/actor'
+
+server.listen port
+

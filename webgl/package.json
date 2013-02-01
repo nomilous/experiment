@@ -11,14 +11,16 @@
     }
   ],
   "dependencies": {
-    "connect-jade": "0.0.3",
     "coffee-script": "~1.4.0",
-    "et": "0.0.4"
+    "et": "0.0.4",
+    "express": "~3.1.0",
+    "jade": "~0.28.1"
   },
   "devDependencies": {
     "coffee-script": "~1.4.0",
     "hound": "~1.0.4",
     "should": "~1.2.1",
-    "mocha": "~1.8.1"
+    "mocha": "~1.8.1",
+    "bunyan": "~0.18.2"
   }
 }
