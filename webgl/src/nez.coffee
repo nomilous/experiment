@@ -1,14 +1,23 @@
-Object.prototype.expect = -> 
+class Nez
+
+    @expectArray: []
+
+    @test: (callback) ->
+
+         callback()
+
+
+Object.prototype.expect = (x) -> 
 
     #
     # Object.expect()
     #
 
-module.exports = (callback) -> 
+    for fn of x
 
-    #
-    # was expectation met?
-    #
+        Nez.expectArray.push 
+            func: fn
+            parm: x[fn]
 
-    callback()
 
+module.exports = Nez

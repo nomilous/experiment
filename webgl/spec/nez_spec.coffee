@@ -1,6 +1,9 @@
 require 'should'
 
-test = require '../src/nez'
+Nez  = require '../src/nez'
+test = Nez.test
+
+class TestExample
 
 
 describe 'Nez', -> 
@@ -26,3 +29,16 @@ describe 'Nez', ->
     it 'calls back', (done) -> 
 
         test done
+
+
+    it 'enables setting expectations', (done) -> 
+
+        TestExample.expect methodName: with: 'arg', returning: 'result'
+
+        Nez.expectArray[0].func.should.equal 'methodName'
+        Nez.expectArray[0].parm.with.should.equal 'arg'
+
+        console.log Nez.expectArray[0]
+
+        test done
+
