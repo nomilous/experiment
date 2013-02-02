@@ -1,7 +1,7 @@
-require 'should'
+should = require 'should'
 
-Nez  = require '../src/nez'
-test = Nez.test
+Nez    = require '../src/nez'
+test   = Nez.test
 
 class TestExample
 
@@ -31,14 +31,28 @@ describe 'Nez', ->
         test done
 
 
-    it 'enables setting expectations', (done) -> 
+    xit 'enables setting expectations', (done) -> 
 
         TestExample.expect methodName: with: 'arg', returning: 'result'
 
         Nez.expectArray[0].func.should.equal 'methodName'
         Nez.expectArray[0].parm.with.should.equal 'arg'
 
-        console.log Nez.expectArray[0]
-
         test done
 
+
+    it 'creates the function on the object', (done) -> 
+
+        TestExample.expect unimplementedFn: with: 'args'     
+
+        TestExample.unimplementedFn.should.be.an.instanceof Function
+
+        test ->
+
+        #
+        # and removes it at callback
+        # 
+
+        should.not.exist TestExample.unimplementedFn
+
+        done()

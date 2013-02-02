@@ -15,8 +15,11 @@ Object.prototype.expect = (x) ->
 
     for fn of x
 
+        this[fn] = (args) -> 
+
         Nez.expectArray.push 
             func: fn
+            call: this[fn]
             parm: x[fn]
 
 
