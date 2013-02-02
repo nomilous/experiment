@@ -6,34 +6,34 @@ test   = Nez.test
 describe 'Nez', -> 
 
 
-    it 'is French for nose', (knows) -> 
+    xit 'is French for nose', (knows) -> 
 
         knows()
 
-    it 'is actually', (that) ->
+    xit 'is actually', (that) ->
 
-        ('nez'[2] + 'nez'[1] + 'nez'[0]) == 'zen'
+        ('nez'[2] + 'nez'[1] + 'nez'[0]).should.equal 'zen'
         that()
 
 
-    it 'creates Object.expect()', (done) -> 
+    xit 'creates Object.expect()', (done) -> 
 
         Object.expectCall.should.be.an.instanceof Function
         done()
 
 
-    it 'returns a function when required', (done) ->
+    xit 'returns a function when required', (done) ->
 
         test.should.be.an.instanceof Function
         done() 
 
 
-    it 'calls back', (done) -> 
+    xit 'calls back', (done) -> 
 
         test done
 
 
-    it 'enables setting expectations', (done) -> 
+    xit 'enables setting expectations', (done) -> 
 
         class TextExample1
 
@@ -45,7 +45,7 @@ describe 'Nez', ->
         test done
 
 
-    it 'creates the function on the object', (done) -> 
+    xit 'creates the function on the object', (done) -> 
 
         class TextExample2
 
@@ -56,6 +56,15 @@ describe 'Nez', ->
         test done
 
 
-    xit 'removes the function after test()', (done) ->
+    it 'removes the function after test()', (done) ->
 
+      class TestExample3
+
+      TestExample3.expectCall fn: with: 'args'
       
+      test -> 
+
+      should.not.exist TestExample3.fn
+
+      done()
+

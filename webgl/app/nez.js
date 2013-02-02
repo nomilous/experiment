@@ -8,12 +8,17 @@ Nez = (function() {
   Nez.expectArray = [];
 
   Nez.test = function(callback) {
+    var expectation;
+    while (Nez.expectArray.length > 0) {
+      expectation = Nez.expectArray.shift();
+      expectation.obj[expectation.functionName] = void 0;
+    }
     return callback();
   };
 
   return Nez;
 
-})();
+}).call(this);
 
 Expectation = (function() {
 
