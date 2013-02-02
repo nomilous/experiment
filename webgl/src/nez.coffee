@@ -8,15 +8,13 @@ class Nez
 
             expectation = @expectArray.shift()
 
-
             #
-            # remove the expectation spy()  
+            # remove/restore the original function
             #
 
-            expectation.obj[ expectation.functionName ] = undefined
+            expectation.obj[ expectation.functionName ] = expectation.functionOrig
 
         callback()
-
 
 
 class Expectation

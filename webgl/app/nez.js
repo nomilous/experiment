@@ -11,7 +11,7 @@ Nez = (function() {
     var expectation;
     while (Nez.expectArray.length > 0) {
       expectation = Nez.expectArray.shift();
-      expectation.obj[expectation.functionName] = void 0;
+      expectation.obj[expectation.functionName] = expectation.functionOrig;
     }
     return callback();
   };

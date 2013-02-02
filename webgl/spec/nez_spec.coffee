@@ -41,18 +41,15 @@ describe 'Nez', ->
 
         Nez.expectArray[0].functionName.should.equal 'methodName'
         Nez.expectArray[0].functionArgs.with.should.equal 'arg'
-
         test done
 
 
     xit 'creates the function on the object', (done) -> 
 
         class TextExample2
-
         TextExample2.expectCall unImplementedFn: with: 'args'
 
         TextExample2.unImplementedFn.should.be.an.instanceof Function
-
         test done
 
 
@@ -65,6 +62,48 @@ describe 'Nez', ->
       test -> 
 
       should.not.exist TestExample3.fn
-
       done()
+
+
+    it 'replaces functions that already exists', (done) -> 
+
+        called = false
+        class TestExample4
+            @existingFn: (args) -> 
+                called = true
+
+        TestExample4.expectCall existingFn: with: 'args'
+        TestExample4.existingFn('args')
+
+        called.should.equal false
+        test done
+
+
+    it 'restores the original function', (done) -> 
+
+        called = false
+        class TestExample5
+            @existingFn: (args) -> 
+                called = true
+
+        TestExample5.expectCall existingFn: with: 'args'
+
+        TestExample5.existingFn('args')
+        called.should.equal false       # original fn was not called
+        test ->                         # restores original
+
+        TestExample5.existingFn('args') # call original
+        called.should.equal true        # original fn was called
+        done()
+
+
+
+
+
+
+
+
+
+
+
 
