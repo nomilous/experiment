@@ -3,9 +3,6 @@ should = require 'should'
 Nez    = require '../src/nez'
 test   = Nez.test
 
-class TestExample
-
-
 describe 'Nez', -> 
 
 
@@ -13,10 +10,15 @@ describe 'Nez', ->
 
         knows()
 
+    it 'is actually', (that) ->
+
+        ('nez'[2] + 'nez'[1] + 'nez'[0]) == 'zen'
+        that()
+
 
     it 'creates Object.expect()', (done) -> 
 
-        Object.expect.should.be.an.instanceof Function
+        Object.expectCall.should.be.an.instanceof Function
         done()
 
 
@@ -31,28 +33,29 @@ describe 'Nez', ->
         test done
 
 
-    xit 'enables setting expectations', (done) -> 
+    it 'enables setting expectations', (done) -> 
 
-        TestExample.expect methodName: with: 'arg', returning: 'result'
+        class TextExample1
 
-        Nez.expectArray[0].func.should.equal 'methodName'
-        Nez.expectArray[0].parm.with.should.equal 'arg'
+        TextExample1.expectCall methodName: with: 'arg'
+
+        Nez.expectArray[0].functionName.should.equal 'methodName'
+        Nez.expectArray[0].functionArgs.with.should.equal 'arg'
 
         test done
 
 
     it 'creates the function on the object', (done) -> 
 
-        TestExample.expect unimplementedFn: with: 'args'     
+        class TextExample2
 
-        TestExample.unimplementedFn.should.be.an.instanceof Function
+        TextExample2.expectCall unImplementedFn: with: 'args'
 
-        test ->
+        TextExample2.unImplementedFn.should.be.an.instanceof Function
 
-        #
-        # and removes it at callback
-        # 
+        test done
 
-        should.not.exist TestExample.unimplementedFn
 
-        done()
+    xit 'removes the function after test()', (done) ->
+
+      

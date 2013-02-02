@@ -7,20 +7,29 @@ class Nez
          callback()
 
 
-Object.prototype.expect = (x) -> 
 
-    #
-    # Object.expect()
-    #
+class Expectation
 
-    for fn of x
+    constructor: (@functionName, @functionArgs, @functionOrig, @obj) -> 
 
-        this[fn] = (args) -> 
+        @obj[@functionName] = ->
 
-        Nez.expectArray.push 
-            func: fn
-            call: this[fn]
-            parm: x[fn]
+
+
+Object.prototype.expectCall = (xpect) -> 
+
+    for fName of xpect
+
+        #
+        # create expectation
+        #
+
+        x = new Expectation fName, xpect[fName], this[fName], this
+
+
+        
+
+        Nez.expectArray.push x
 
 
 module.exports = Nez
