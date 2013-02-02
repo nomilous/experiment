@@ -2,6 +2,8 @@ class Nez
 
     @expectArray: []
 
+    @calledArray: []
+
     @test: (callback) =>
 
         while @expectArray.length > 0
@@ -17,6 +19,12 @@ class Nez
         callback()
 
 
+class Realization
+
+    constructor: (@functionName) -> 
+
+        
+
 class Expectation
 
     constructor: (@functionName, @functionArgs, @functionOrig, @obj) -> 
@@ -25,7 +33,16 @@ class Expectation
         # attach the expectation spy()
         #
 
-        @obj[@functionName] = ->
+        @obj[@functionName] = =>
+
+            #
+            # push details of each call to 
+            # the spy() into Nez.calledArray
+            # 
+
+            call = new Realization @functionName
+
+            Nez.calledArray.push call
 
 
 

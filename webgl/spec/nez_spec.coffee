@@ -53,7 +53,7 @@ describe 'Nez', ->
         test done
 
 
-    it 'removes the function after test()', (done) ->
+    xit 'removes the function after test()', (done) ->
 
       class TestExample3
 
@@ -65,7 +65,7 @@ describe 'Nez', ->
       done()
 
 
-    it 'replaces functions that already exists', (done) -> 
+    xit 'replaces functions that already exists', (done) -> 
 
         called = false
         class TestExample4
@@ -79,7 +79,7 @@ describe 'Nez', ->
         test done
 
 
-    it 'restores the original function', (done) -> 
+    xit 'restores the original function', (done) -> 
 
         called = false
         class TestExample5
@@ -96,6 +96,15 @@ describe 'Nez', ->
         called.should.equal true        # original fn was called
         done()
 
+    it 'keeps track of calls to the ex-spectated function', (done) -> 
+
+        class TestExample6
+
+        TestExample6.expectCall func: with: 'arg'  # set expectation
+        TestExample6.func('arg')                   # meet expectation
+
+        Nez.calledArray[0].functionName.should.equal 'func'
+        done()
 
 
 
