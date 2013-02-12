@@ -35,28 +35,34 @@ describe 'Realm', ->
 
     it 'is constructed with all required elements from the global scope', (done) -> 
 
-        @document.expect
+        # @document.expect
 
-            #
-            # Expect document.getElementById to be called
-            # 
-            # Test fails if not.
-            # 
+        #     #
+        #     # Expect document.getElementById to be called
+        #     # 
+        #     # Test fails if not.
+        #     # 
 
-            getElementById: (id) -> 
+        #     getElementById: (id) -> 
 
-                #
-                # Check that it was called with the right arg
-                #
+        #         #
+        #         # Check that it was called with the right arg
+        #         #
                 
-                id.should.equal 'viewport_id'
+        #         id.should.equal 'viewport_id'
 
-                #
-                # And return a stub for the ""found"" element 
-                # that defines appendChild()
-                #
+        #         #
+        #         # And return a stub for the ""found"" element 
+        #         # that defines appendChild()
+        #         #
 
-                return appendChild: ->
+        #         return appendChild: ->
+
+        # 
+        # or,  with identical effect
+        # 
+
+        @document.expect getElementById: with: 'viewport_id', returning: appendChild: ->
 
 
 
