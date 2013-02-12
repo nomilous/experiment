@@ -1,22 +1,20 @@
-sinon  = require 'sinon'
 should = require 'should'
 Realm  = require '../../app/client/realm'
+
+test = require('nez').test
+
+
 
 describe 'Realm', -> 
 
 
     before (done) ->
 
-        @spy = sinon.spy()
-
         #
         # mock all
         #
 
-        @document = 
-            getElementById: (id) => 
-                @spy id
-                return appendChild: ->
+        @document = {}
         @window =
             innerWidth: 1024
             innerHeight: 768
@@ -37,10 +35,34 @@ describe 'Realm', ->
 
     it 'is constructed with all required elements from the global scope', (done) -> 
 
-        realm = new Realm @document, @window, @angular, @three, 'viewport_id'
+        @document.expect
 
-        @spy.calledWith('viewport_id').should.equal true
-        done()
+            #
+            # Expect document.getElementById to be called
+            # 
+            # Test fails if not.
+            # 
+
+            getElementById: (id) -> 
+
+                #
+                # Check that it was called with the right arg
+                #
+                
+                id.should.equal 'viewport_id'
+
+                #
+                # And return a stub for the ""found"" element 
+                # that defines appendChild()
+                #
+
+                return appendChild: ->
+
+
+
+        realm = new Realm @document, @window, @angular, @three, 'viewport_id'
+        
+        test done
 
 
     it 'has Actor and Scene definitions subclassed', (done) -> 
